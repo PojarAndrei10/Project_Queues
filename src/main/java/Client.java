@@ -30,9 +30,9 @@ public class Client {
     @Override
     public String toString() {
         return "Client{" +
-                "ID=" + ID +
-                ", arrivalTime=" + arrivalTime +
-                ", serviceTime=" + serviceTime +
+                "ID =" + ID +
+                ", ora de sosire =" + arrivalTime +
+                ", durata serviciului =" + serviceTime +
                 '}';
     }
 }

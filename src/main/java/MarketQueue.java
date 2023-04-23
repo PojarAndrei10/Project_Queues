@@ -16,21 +16,21 @@ public class MarketQueue implements Runnable{
         return coada;
     }
     public void setCoada(BlockingQueue<Client> coada) {
-
         this.coada = coada;
     }
-    public AtomicInteger getTimeWaiting() {
 
+    public AtomicInteger getTimeWaiting() {
         return timeWaiting;
     }
-    public void setTimeWaiting(AtomicInteger timeWaiting) {
 
+    public void setTimeWaiting(AtomicInteger timeWaiting) {
         this.timeWaiting = timeWaiting;
     }
-    public AtomicInteger getNumberClientsWaiting() {
 
+    public AtomicInteger getNumberClientsWaiting() {
         return numberClientsWaiting;
     }
+
     public void setNumberClientsWaiting(AtomicInteger numberClientsWaiting) {
         this.numberClientsWaiting = numberClientsWaiting;
     }
@@ -64,12 +64,19 @@ public class MarketQueue implements Runnable{
         }
     }
     public String toString(int k) {
-        String rez=k+" ";
-        rez=rez+"Timp asteptare : "+timeWaiting.toString()+" ";
-        rez=rez+"Numar de clienti care asteapta :"+numberClientsWaiting.toString()+" :";
-        for(Client i:this.getCoada())
-            rez=rez+ i+" ";
-        return rez;
+        StringBuilder sb=new StringBuilder("Coada : "+k+" :");
+        sb.append("Timp asteptare :").append(timeWaiting.toString()).append(" ");
+        sb.append("Numar de clienti care asteapta :").append(numberClientsWaiting.toString()).append(" :");
+        for(Client i: this.getCoada())
+            sb.append(" ").append(i);
+        return sb.toString();
     }
 
+    public void setOk(boolean b) {
+        this.ok=ok;
+    }
+
+    public Boolean getOk() {
+        return ok;
+    }
 }
