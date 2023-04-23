@@ -22,6 +22,12 @@ public class Interfata {
     private JLabel timpMaxServire=new JLabel();
     private JLabel titlu=new JLabel();
 
+    private JLabel selectionPolicyLabel;
+    private JRadioButton shortestQueue;
+    private JRadioButton shortestWaitingTime;
+    private ButtonGroup selectionPolicyGroup;
+
+    protected JButton startSimulationButton;
     public void gestionareLabel() {
 
         titlu.setBounds(470, 10, 200, 200);
@@ -121,5 +127,37 @@ public class Interfata {
         gestionareButoane();
         frame.setContentPane(panel);
         frame.setVisible(true);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public JLabel getNrClienti() {
+        return nrClienti;
+    }
+
+    public JLabel getNrCozi() {
+        return nrCozi;
+    }
+
+    public JLabel getTimpMaxSimulare() {
+        return timpMaxSimulare;
+    }
+
+    public JLabel getTimpMinSosire() {
+        return timpMinSosire;
+    }
+
+    public JLabel getTimpMaxSosire() {
+        return timpMaxSosire;
+    }
+
+    public JLabel getTimpMinServire() {
+        return timpMinServire;
+    }
+
+    public JLabel getTimpMaxServire() {
+        return timpMaxServire;
     }
 }
