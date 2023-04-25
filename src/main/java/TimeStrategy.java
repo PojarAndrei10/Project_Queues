@@ -13,6 +13,8 @@ public class TimeStrategy implements Strategy {
                 mq= i;
             }
         }
+        if(minim>1)
+        SimulationManagerMain.timpAsteptareTotal+=minim-1;
         mq.adaugareClient(c);
     }
 }

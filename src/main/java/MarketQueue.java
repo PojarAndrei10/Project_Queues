@@ -54,7 +54,10 @@ public class MarketQueue implements Runnable{
             try{
                 if(this.coada.size()>0) {
                     c1 = this.coada.element();
-                    Thread.sleep(1000 * c1.getServiceTime());
+                    Thread.sleep(1000 );
+                    if(c1.getServiceTime()>1)
+                        c1.setServiceTime(c1.getServiceTime()-1);
+                    else
                     stergereClient(c1);
                 }
             }
@@ -78,5 +81,9 @@ public class MarketQueue implements Runnable{
 
     public Boolean getOk() {
         return ok;
+    }
+    public void stop()
+    {
+        //FUNCTIA DE STOP
     }
 }

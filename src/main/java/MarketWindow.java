@@ -38,6 +38,20 @@ public class MarketWindow extends JFrame{
         labelConstraints.setY(Spring.constant(x));
         label.setVisible(true);
     }
+    public void settingL2(String text,int x,int y)
+    {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Serif", Font.ITALIC, 25));
+        label.setOpaque(true);
+        label.setBackground(new Color(153, 165, 201));
+        label.setForeground(new Color(13, 13, 13));
+
+        interfataPanel.add(label);
+        SpringLayout.Constraints labelConstraints = sl.getConstraints(label);
+        labelConstraints.setX(Spring.constant(y));
+        labelConstraints.setY(Spring.constant(x));
+        label.setVisible(true);
+    }
     public MarketWindow()
     {
         this.setInterfataPanel();

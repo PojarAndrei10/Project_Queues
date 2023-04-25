@@ -98,6 +98,7 @@ public class InterfataSimulare  extends  JFrame{
         startSimulare.setBounds(50, 400, 200, 50);
         startSimulare.setText("START");
         startSimulare.setBackground(new Color(72, 99, 182));
+        startSimulare.addActionListener(c);
         panel.add(startSimulare);
 
         butonExit.setBounds(50,500,200,50);
@@ -166,7 +167,7 @@ public class InterfataSimulare  extends  JFrame{
         return ((Integer) alegereTimpMinServire.getValue()).intValue();
     }
     public Integer getAlegereTimpMaxServire() {
-        return ((Integer) alegereNumarClienti.getValue()).intValue();
+        return ((Integer) alegereTimpMaxServire.getValue()).intValue();
     }
     public Policy getPoliticaDeSelectie(){
         if(shortestQ.isSelected())

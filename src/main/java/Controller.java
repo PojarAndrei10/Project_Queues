@@ -1,5 +1,9 @@
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Controller {
+public class Controller implements ChangeListener, ActionListener {
     private InterfataSimulare interfataSimulare;
     public boolean isValid(){
         boolean ok=true;
@@ -31,8 +35,24 @@ public class Controller {
         if(timpMaxSosire>durataSimulare) return false;
         return true;
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        interfataSimulare.setVisible(false);
+        SimulationManagerMain sim = new SimulationManagerMain(interfataSimulare);
+        Thread thread = new Thread(sim);
+        thread.start();
+    }
     public Controller(InterfataSimulare interfataSimulare){
         this.interfataSimulare=interfataSimulare;
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        if (isValid()) {
+            interfataSimulare.startSimulare.setEnabled(true);
+        } else {
+            interfataSimulare.startSimulare.setEnabled(false);
+        }
     }
 }
 

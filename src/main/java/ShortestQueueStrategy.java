@@ -9,11 +9,13 @@ public class ShortestQueueStrategy implements Strategy{
         Iterator<MarketQueue> it = qm.iterator();
         while (it.hasNext()) {
             MarketQueue i = it.next();
-            if (i.getTimeWaiting().get() < minim) {
-                minim = i.getTimeWaiting().get();
+            if (i.getNumberClientsWaiting().get() < minim) {
+                minim = i.getNumberClientsWaiting().get();
                 mq= i;
             }
         }
+        if(mq.getTimeWaiting().intValue()>1)
+        SimulationManagerMain.timpAsteptareTotal+=mq.getTimeWaiting().intValue()-1;
         mq.adaugareClient(c);
     }
 }
