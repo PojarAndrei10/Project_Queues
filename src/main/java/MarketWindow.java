@@ -27,7 +27,7 @@ public class MarketWindow extends JFrame{
     }
     public void settingL(String text,int x,int y) {
         JLabel label = new JLabel(text);
-        label.setFont(new Font("Serif", Font.ITALIC, 16));
+        label.setFont(new Font("Serif", Font.ITALIC, 12));
         label.setOpaque(true);
         label.setBackground(new Color(153, 165, 201));
         label.setForeground(new Color(13, 13, 13));

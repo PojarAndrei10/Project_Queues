@@ -56,7 +56,7 @@ public class MarketQueue implements Runnable{
                     c1 = this.coada.element();
                     Thread.sleep(1000 );
                     if(c1.getServiceTime()>1)
-                        c1.setServiceTime(c1.getServiceTime()-1);
+                        c1.setServiceTime(c1.getServiceTime() - 1);
                     else
                     stergereClient(c1);
                 }

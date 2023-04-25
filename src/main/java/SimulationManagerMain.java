@@ -105,8 +105,9 @@ public class SimulationManagerMain implements Runnable{
             {
                 c= clienti.get(0);
                 scheduler.dispatchTask(c);
-                timpMediuServire =timpMediuServire+ clienti.get(0).getServiceTime();
+                timpMediuServire =timpMediuServire + clienti.get(0).getServiceTime();
                 clienti.remove(0);
+
             }
             m.getInterfataPanel().removeAll();
             try {
@@ -137,6 +138,13 @@ public class SimulationManagerMain implements Runnable{
             catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        x=pixel;
+        if(timpCurent<=timpSimulare)
+        try {
+            stareMarket(m,scheduler.getMarketQueue(),timpCurent,x,x);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         try {
             //aici facem interfata pentru rezultatele finale
