@@ -69,7 +69,7 @@ public class MarketQueue implements Runnable{
     public String toString(int k) {
         StringBuilder sb=new StringBuilder("Coada : "+k+" :");
         sb.append("Timp asteptare :").append(timeWaiting.toString()).append(" ");
-        sb.append("Numar de clienti care asteapta :").append(numberClientsWaiting.toString()).append(" :");
+        sb.append("Numar de clienti care asteapta :").append(numberClientsWaiting.toString()).append(" ->");
         for(Client i: this.getCoada())
             sb.append(" ").append(i);
         return sb.toString();

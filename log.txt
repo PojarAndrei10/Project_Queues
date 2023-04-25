@@ -1,38 +1,59 @@
 Timer: 0
-Clientii in asteptare :[Client{ID =1, ora de sosire =1, durata serviciului =2}, Client{ID =2, ora de sosire =1, durata serviciului =2}, Client{ID =4, ora de sosire =1, durata serviciului =2}, Client{ID =3, ora de sosire =3, durata serviciului =1}, Client{ID =5, ora de sosire =3, durata serviciului =2}]
+Clientii in asteptare :[Client{ID =2, ora de sosire =1, durata serviciului =3}, Client{ID =1, ora de sosire =3, durata serviciului =1}, Client{ID =3, ora de sosire =3, durata serviciului =2}, Client{ID =4, ora de sosire =3, durata serviciului =3}, Client{ID =5, ora de sosire =3, durata serviciului =1}]
 
-Coada : 1 :Timp asteptare :0 Numar de clienti care asteapta :0 :
-Coada : 2 :Timp asteptare :0 Numar de clienti care asteapta :0 :
-Coada : 3 :Timp asteptare :0 Numar de clienti care asteapta :0 :
+Coada : 1 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
+Coada : 2 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
+Coada : 3 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
 
 Timer: 1
-Clientii in asteptare :[Client{ID =3, ora de sosire =3, durata serviciului =1}, Client{ID =5, ora de sosire =3, durata serviciului =2}]
+Clientii in asteptare :[Client{ID =1, ora de sosire =3, durata serviciului =1}, Client{ID =3, ora de sosire =3, durata serviciului =2}, Client{ID =4, ora de sosire =3, durata serviciului =3}, Client{ID =5, ora de sosire =3, durata serviciului =1}]
 
-Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =1, ora de sosire =1, durata serviciului =2}
-Coada : 2 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =2, ora de sosire =1, durata serviciului =2}
-Coada : 3 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =4, ora de sosire =1, durata serviciului =2}
+Coada : 1 :Timp asteptare :3 Numar de clienti care asteapta :1 -> Client{ID =2, ora de sosire =1, durata serviciului =3}
+Coada : 2 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
+Coada : 3 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
 
 Timer: 2
-Clientii in asteptare :[Client{ID =3, ora de sosire =3, durata serviciului =1}, Client{ID =5, ora de sosire =3, durata serviciului =2}]
+Clientii in asteptare :[Client{ID =1, ora de sosire =3, durata serviciului =1}, Client{ID =3, ora de sosire =3, durata serviciului =2}, Client{ID =4, ora de sosire =3, durata serviciului =3}, Client{ID =5, ora de sosire =3, durata serviciului =1}]
 
-Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =1, ora de sosire =1, durata serviciului =1}
-Coada : 2 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =2, ora de sosire =1, durata serviciului =1}
-Coada : 3 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =4, ora de sosire =1, durata serviciului =1}
+Coada : 1 :Timp asteptare :3 Numar de clienti care asteapta :1 -> Client{ID =2, ora de sosire =1, durata serviciului =3}
+Coada : 2 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
+Coada : 3 :Timp asteptare :0 Numar de clienti care asteapta :0 ->
 
 Timer: 3
 Clientii in asteptare :[]
 
-Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :1 : Client{ID =3, ora de sosire =3, durata serviciului =1}
-Coada : 2 :Timp asteptare :3 Numar de clienti care asteapta :1 : Client{ID =5, ora de sosire =3, durata serviciului =2}
-Coada : 3 :Timp asteptare :1 Numar de clienti care asteapta :0 :
+Coada : 1 :Timp asteptare :3 Numar de clienti care asteapta :1 -> Client{ID =2, ora de sosire =1, durata serviciului =1}
+Coada : 2 :Timp asteptare :4 Numar de clienti care asteapta :2 -> Client{ID =1, ora de sosire =3, durata serviciului =1} Client{ID =4, ora de sosire =3, durata serviciului =3}
+Coada : 3 :Timp asteptare :3 Numar de clienti care asteapta :2 -> Client{ID =3, ora de sosire =3, durata serviciului =2} Client{ID =5, ora de sosire =3, durata serviciului =1}
 
 Timer: 4
 Clientii in asteptare :[]
 
-Coada : 1 :Timp asteptare :1 Numar de clienti care asteapta :0 :
-Coada : 2 :Timp asteptare :3 Numar de clienti care asteapta :1 : Client{ID =5, ora de sosire =3, durata serviciului =1}
-Coada : 3 :Timp asteptare :1 Numar de clienti care asteapta :0 :
+Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :0 ->
+Coada : 2 :Timp asteptare :3 Numar de clienti care asteapta :1 -> Client{ID =4, ora de sosire =3, durata serviciului =3}
+Coada : 3 :Timp asteptare :3 Numar de clienti care asteapta :2 -> Client{ID =3, ora de sosire =3, durata serviciului =1} Client{ID =5, ora de sosire =3, durata serviciului =1}
 
-FINAL DE SIMULARE  Rezultate:Durata medie a serviciului: 1.80
-Timp mediu de așteptare: 0.00
-Ora de varf: 1
+Timer: 5
+Clientii in asteptare :[]
+
+Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :0 ->
+Coada : 2 :Timp asteptare :3 Numar de clienti care asteapta :1 -> Client{ID =4, ora de sosire =3, durata serviciului =2}
+Coada : 3 :Timp asteptare :2 Numar de clienti care asteapta :1 -> Client{ID =5, ora de sosire =3, durata serviciului =1}
+
+Timer: 6
+Clientii in asteptare :[]
+
+Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :0 ->
+Coada : 2 :Timp asteptare :3 Numar de clienti care asteapta :1 -> Client{ID =4, ora de sosire =3, durata serviciului =2}
+Coada : 3 :Timp asteptare :1 Numar de clienti care asteapta :0 ->
+
+Timer: 7
+Clientii in asteptare :[]
+
+Coada : 1 :Timp asteptare :2 Numar de clienti care asteapta :0 ->
+Coada : 2 :Timp asteptare :2 Numar de clienti care asteapta :0 ->
+Coada : 3 :Timp asteptare :1 Numar de clienti care asteapta :0 ->
+
+FINAL DE SIMULARE  Rezultate:Durata medie a serviciului: 2.00
+Timp mediu de așteptare: 0.20
+Ora de varf: 3
