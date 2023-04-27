@@ -106,6 +106,7 @@ public class SimulationManagerMain implements Runnable{
         int pixel=50;
         Client c;
         SimulationManagerMain.timpAsteptareTotal=0;
+
         while(timpCurent<timpSimulare &&  (!clienti.isEmpty() || !scheduler.isEmpty())  )
         {
             while(clienti.size()>0 && clienti.get(0).getArrivalTime()==timpCurent)
