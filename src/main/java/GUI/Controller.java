@@ -25,7 +25,6 @@ public class Controller implements ChangeListener, ActionListener {
         timpMinServire=interfataSimulare.getAlegereTimpMinServire();
         Integer timpMaxServire;
         timpMaxServire=interfataSimulare.getAlegereTimpMaxServire();
-
         if(numarClienti<=0) return false;
         if(numarCozi<=0) return false;
         if(durataSimulare<=0) return false;
