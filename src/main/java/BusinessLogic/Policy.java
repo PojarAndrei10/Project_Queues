@@ -1,18 +1,16 @@
 package BusinessLogic;
-
 public enum Policy{
-    //cele doua posibilitati de selection policy
     SHORTEST_TIME ("Shortest time"),
     SHORTEST_QUEUE ("Shortest queue");
-    private final String nume;
+    private final String name;
     Policy(String s){
-        nume = s;
+        name = s;
     }
-    public String getNume() {
-        return nume;
+    public String getName() {
+        return name;
     }
     @Override
     public String toString() {
-       return this.nume;
+       return this.name;
     }
 }

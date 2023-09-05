@@ -8,19 +8,19 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 public class TimeStrategy implements Strategy {
     @Override
-    public void adaugareClient(CopyOnWriteArrayList<MarketQueue> qm, Client c) {
+    public void addClient(CopyOnWriteArrayList<MarketQueue> qm, Client c) {
         MarketQueue mq = new MarketQueue();
-        int minim = Integer.MAX_VALUE;
+        int min= Integer.MAX_VALUE;
         Iterator<MarketQueue> it = qm.iterator();
         while (it.hasNext()) {
             MarketQueue i = it.next();
-            if (i.getTimeWaiting().get() < minim) {
-                minim = i.getTimeWaiting().get();
+            if (i.getTimeWaiting().get() < min) {
+                min = i.getTimeWaiting().get();
                 mq= i;
             }
         }
-        if(minim>1)
-        SimulationManagerMain.timpAsteptareTotal+=minim-1;
-        mq.adaugareClient(c);
+        if(min>1)
+        SimulationManagerMain.totalWaitingTime+=min-1;
+        mq.addClients(c);
     }
 }

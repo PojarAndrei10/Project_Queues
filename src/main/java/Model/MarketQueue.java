@@ -6,21 +6,21 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 public class MarketQueue implements Runnable{
-    private BlockingQueue <Client> coada;
+    private BlockingQueue <Client> queue;
     private AtomicInteger timeWaiting;
     private AtomicInteger numberClientsWaiting;
     private Boolean ok=false;
     public MarketQueue()
     {
-        this.coada=new LinkedBlockingQueue<>();
+        this.queue=new LinkedBlockingQueue<>();
         this.timeWaiting=new AtomicInteger(0);
         this.numberClientsWaiting=new AtomicInteger(0);
     }
-    public BlockingQueue<Client> getCoada() {
-        return coada;
+    public BlockingQueue<Client> getQueue() {
+        return queue;
     }
-    public void setCoada(BlockingQueue<Client> coada) {
-        this.coada = coada;
+    public void setQueue(BlockingQueue<Client> coada) {
+        this.queue = coada;
     }
 
     public AtomicInteger getTimeWaiting() {
@@ -38,15 +38,15 @@ public class MarketQueue implements Runnable{
     public void setNumberClientsWaiting(AtomicInteger numberClientsWaiting) {
         this.numberClientsWaiting = numberClientsWaiting;
     }
-    public void adaugareClient(Client c)
+    public void addClients(Client c)
     {
-        this.getCoada().add(c);
+        this.getQueue().add(c);
         numberClientsWaiting.getAndIncrement();
         timeWaiting.getAndAdd(c.getServiceTime());
     }
-    public void stergereClient(Client c)
+    public void deleteClients(Client c)
     {
-        this.getCoada().remove(c);
+        this.getQueue().remove(c);
         numberClientsWaiting.getAndDecrement();
         timeWaiting.getAndAdd(-c.getServiceTime());
     }
@@ -56,13 +56,13 @@ public class MarketQueue implements Runnable{
         {
             Client c1;
             try{
-                if(this.coada.size()>0) {
-                    c1 = this.coada.element();
+                if(this.queue.size()>0) {
+                    c1 = this.queue.element();
                     Thread.sleep(1000 );
                     if(c1.getServiceTime()>1)
                         c1.setServiceTime(c1.getServiceTime() - 1);
                     else
-                    stergereClient(c1);
+                    deleteClients(c1);
                 }
             }
             catch (InterruptedException e) {
@@ -74,7 +74,7 @@ public class MarketQueue implements Runnable{
         StringBuilder sb=new StringBuilder("Coada : "+k+" :");
         sb.append("Timp asteptare :").append(timeWaiting.toString()).append(" ");
         sb.append("Numar de clienti care asteapta :").append(numberClientsWaiting.toString()).append(" ->");
-        for(Client i: this.getCoada())
+        for(Client i: this.getQueue())
             sb.append(" ").append(i);
         return sb.toString();
     }
@@ -82,12 +82,11 @@ public class MarketQueue implements Runnable{
     public void setOk(boolean b) {
         this.ok=ok;
     }
-
     public Boolean getOk() {
         return ok;
     }
     public void stop()
     {
-        //FUNCTIA DE STOP
+        //STOP
     }
 }

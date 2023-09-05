@@ -4,7 +4,6 @@ import GUI.InterfataSimulare;
 import GUI.MarketWindow;
 import Model.Client;
 import Model.MarketQueue;
-
 import java.io.*;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,79 +12,79 @@ import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SimulationManagerMain implements Runnable{
-    private Integer numarClienti;
-    private Integer numarCozi;
-    private Integer timpSimulare;
-    private Integer timpMinSosire;
-    private Integer timpMaxSosire;
-    private Integer timpMinServire;
-    private Integer timpMaxServire;
-    private CopyOnWriteArrayList<Client> clienti;
+    private Integer numberClients;
+    private Integer numberQueue;
+    private Integer simulationTime;
+    private Integer minArrivalTime;
+    private Integer maxArrivalTime;
+    private Integer minServingTime;
+    private Integer maxServingTime;
+    private CopyOnWriteArrayList<Client> clients;
     private Scheduler scheduler;
-   private Policy politicaDistribuireClienti;
+    private Policy distributionPolicy;
     private FileWriter w;
     private File fileTxt;
-    public static int timpAsteptareTotal;
+    public static int totalWaitingTime;
     public void generateRandomClient(){
         int i = 0;
         Random random = new Random();
         Client client;
-        Integer k,oraSosire,oraServire;
-        System.out.println(timpMinServire);
-        System.out.println(timpMaxServire);
-        while (i < numarClienti) {
+        Integer k,timeToArrive,timeToServe;
+        System.out.println(minServingTime);
+        System.out.println(maxServingTime);
+        while (i < numberClients) {
             k = i+1;
-            oraSosire = random.nextInt(timpMinSosire,timpMaxSosire+1); //ca sa faca interval inchis
-            oraServire= random.nextInt(timpMinServire,timpMaxServire+1);
-            client = new Client(k,oraSosire,oraServire);
-            clienti.add(i,client);
+            timeToArrive = random.nextInt(minArrivalTime,maxArrivalTime+1);
+            timeToServe= random.nextInt(minServingTime,maxServingTime+1);
+            client = new Client(k,timeToArrive,timeToServe);
+            clients.add(i,client);
             i++;
         }
-        Collections.sort(clienti, new Comparator<Client>() {
+        Collections.sort(clients, new Comparator<Client>() {
             @Override
             public int compare(Client c1, Client c2) {
                 return Integer.compare(c1.getArrivalTime(), c2.getArrivalTime());
             }
         });
     }
-    public Double timpMediuAsteptare(CopyOnWriteArrayList<MarketQueue> market){
-        Integer numarClientiInAsteptare = 0;
-        Double timpAsteptare = 0.0;
+    public Double averageWaitingTime(CopyOnWriteArrayList<MarketQueue> market){
+        Integer numberOfWaitingC = 0;
+        Double waitingTime = 0.0;
         boolean ok=false;
         for(MarketQueue qm : market){
-            if(qm.getCoada().size()>0)
+            if(qm.getQueue().size()>0)
             {
-                timpAsteptare=timpAsteptare+qm.getTimeWaiting().doubleValue();
-                numarClientiInAsteptare=numarClientiInAsteptare+qm.getNumberClientsWaiting().intValue();
+                waitingTime=waitingTime+qm.getTimeWaiting().doubleValue();
+                numberOfWaitingC=numberOfWaitingC+qm.getNumberClientsWaiting().intValue();
             }
         }
-        if(numarClientiInAsteptare!=0)
-            return (timpAsteptare/numarClientiInAsteptare);
+        if(numberOfWaitingC!=0)
+            return (waitingTime/numberOfWaitingC);
         return 0.0;
     }
-    public Integer numarClientiInAsteptare(CopyOnWriteArrayList<MarketQueue> market){
+    public Integer numberOfWaitingClients(CopyOnWriteArrayList<MarketQueue> market){
         Iterator<MarketQueue> it = market.iterator();
-        Integer numarulClientilorInAsteptare = 0;
+        Integer numberOfWaitingC = 0;
         boolean ok=false;
         while (it.hasNext()) {
             MarketQueue mq = it.next();
-            if (mq.getCoada().size() > 0) {
-                numarulClientilorInAsteptare =numarulClientilorInAsteptare+ mq.getNumberClientsWaiting().intValue();
+            if (mq.getQueue().size() > 0) {
+                numberOfWaitingC =numberOfWaitingC+ mq.getNumberClientsWaiting().intValue();
             }
         }
-        return numarulClientilorInAsteptare;
+        return numberOfWaitingC;
     }
-    public void stareMarket(MarketWindow marketWindow, CopyOnWriteArrayList<MarketQueue> market, int i,
+    public void stateMarket(MarketWindow marketWindow, CopyOnWriteArrayList<MarketQueue> market, int i,
                             int x, int y) throws IOException {
         StringBuilder sb = new StringBuilder();
         Integer k = 1;
         sb.append("Timer: ").append(i).append("\n");
         marketWindow.settingL("Timer: " + i, x, y);
-        sb.append("Clientii in asteptare :").append(clienti).append("\n");
+        sb.append("Clientii in asteptare :").append(clients).append("\n");
         sb.append("\n");
-        int pixeli=50;
+        int pixels=50;
         for (MarketQueue j : market) {
-            x=x+pixeli;
+            x=x+pixels;
             sb.append(j.toString(k)).append("\n");
             marketWindow.settingL(j.toString(k), x, y);
             k++;
@@ -95,51 +94,50 @@ public class SimulationManagerMain implements Runnable{
     }
     @Override
     public void run() {
-        Integer numarMaximClientiInAsteptare = 0;
-        Integer oraDeVarf = -1;
-        Integer timpCurent = 0;
+        Integer maximumNumberOfWaitingClients = 0;
+        Integer peakTime = -1;
+        Integer currentTime = 0;
         MarketWindow m = new MarketWindow();
         m.setVisible(true);
-        Double timpMediuAsteptare = 0.0;
-        Double timpMediuServire = 0.0;
+        Double averageWaitingTime = 0.0;
+        Double averageServingTime = 0.0;
         int x;
         int pixel=50;
         Client c;
-        SimulationManagerMain.timpAsteptareTotal=0;
+        SimulationManagerMain.totalWaitingTime=0;
 
-        while(timpCurent<timpSimulare &&  (!clienti.isEmpty() || !scheduler.isEmpty())  )
+        while(currentTime<simulationTime &&  (!clients.isEmpty() || !scheduler.isEmpty())  )
         {
-            while(clienti.size()>0 && clienti.get(0).getArrivalTime()==timpCurent)
+            while(clients.size()>0 && clients.get(0).getArrivalTime()==currentTime)
             {
-                c= clienti.get(0);
+                c= clients.get(0);
                 scheduler.dispatchTask(c);
-                timpMediuServire =timpMediuServire + clienti.get(0).getServiceTime();
-                clienti.remove(0);
-
+                averageServingTime =averageServingTime + clients.get(0).getServiceTime();
+                clients.remove(0);
             }
-            m.getInterfata().removeAll();
+            m.getInterfacePanel().removeAll();
             try {
                 x = pixel;
                 final int y = pixel;
 
-                stareMarket(m,scheduler.getMarketQueue(),timpCurent,x,y);
+                stateMarket(m,scheduler.getMarketQueue(),currentTime,x,y);
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
-            m.getInterfata().revalidate();
-            m.getInterfata().repaint();
+            m.getInterfacePanel().revalidate();
+            m.getInterfacePanel().repaint();
 
-            timpMediuAsteptare =timpMediuAsteptare+ timpMediuAsteptare(scheduler.getMarketQueue());
-            Integer itNumarClienti ;
-            itNumarClienti = numarClientiInAsteptare(scheduler.getMarketQueue());
+            averageWaitingTime =averageWaitingTime+ averageWaitingTime(scheduler.getMarketQueue());
+            Integer itNrClients ;
+            itNrClients = numberOfWaitingClients(scheduler.getMarketQueue());
 
-            if(itNumarClienti>numarMaximClientiInAsteptare)
+            if(itNrClients>maximumNumberOfWaitingClients)
             {
-                numarMaximClientiInAsteptare = itNumarClienti;
-                oraDeVarf = timpCurent; //calculam peak hour
+                maximumNumberOfWaitingClients = itNrClients;
+                peakTime = currentTime; //peak hour
             }
-            timpCurent++;
+            currentTime++;
             try {
                 Thread.sleep(1000);
             }
@@ -148,34 +146,32 @@ public class SimulationManagerMain implements Runnable{
             }
         }
         x=pixel;
-        if(timpCurent<=timpSimulare)
+        if(currentTime<=simulationTime)
         try {
-            stareMarket(m,scheduler.getMarketQueue(),timpCurent,x,x);
+            stateMarket(m,scheduler.getMarketQueue(),currentTime,x,x);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            //aici facem interfata pentru rezultatele finale
-            m.getInterfata().removeAll();
-            String rezultate = "FINAL DE SIMULARE  Rezultate:";
-            rezultate =rezultate+ "Durata medie a serviciului: " + String.format("%.2f",timpMediuServire/numarClienti)+"\n";
-            rezultate =rezultate+ "Timp mediu de așteptare: " + String.format("%.2f",SimulationManagerMain.timpAsteptareTotal*1.0/numarClienti)+"\n";
-            rezultate =rezultate+ "Ora de varf: "+oraDeVarf;
-            w.write(rezultate);
-            // setare etichete pentru rezultatele simulării pe panoul de interfață
+            m.getInterfacePanel().removeAll();
+            String result = "FINAL DE SIMULARE  Rezultate:";
+            result =result+ "Durata medie a serviciului: " + String.format("%.2f",averageServingTime/numberClients)+"\n";
+            result =result+ "Timp mediu de așteptare: " + String.format("%.2f",SimulationManagerMain.totalWaitingTime*1.0/numberClients)+"\n";
+            result =result+ "Ora de varf: "+peakTime;
+            w.write(result);
+
             m.settingL2("FINAL DE SIMULARE - Mai jos putem vedea rezultatele simularii:",100,450);
-            m.settingL2("Durata medie a serviciului: " + String.format("%.2f",timpMediuServire/numarClienti),165,450);
-            m.settingL2("Timp mediu de așteptare: " + String.format("%.2f",SimulationManagerMain.timpAsteptareTotal*1.0/numarClienti),190,450);
-            m.settingL2("Ora de varf: "+oraDeVarf,215,450);
-            // revalidare și redesenare panou de interfață
-            m.getInterfata().revalidate();
-            m.getInterfata().repaint();
+            m.settingL2("Durata medie a serviciului: " + String.format("%.2f",averageServingTime/numberClients),165,450);
+            m.settingL2("Timp mediu de așteptare: " + String.format("%.2f",SimulationManagerMain.totalWaitingTime*1.0/numberClients),190,450);
+            m.settingL2("Ora de varf: "+peakTime,215,450);
+
+            m.getInterfacePanel().revalidate();
+            m.getInterfacePanel().repaint();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-
         CopyOnWriteArrayList<MarketQueue> mq = scheduler.getMarketQueue();
         int index = 0;
         while(index < mq.size())
@@ -185,7 +181,6 @@ public class SimulationManagerMain implements Runnable{
             i.stop();
             index++;
         }
-
         try {
             w.close();
         }
@@ -193,22 +188,20 @@ public class SimulationManagerMain implements Runnable{
             e.printStackTrace();
         }
     }
-    public SimulationManagerMain(InterfataSimulare interfataSimulare) {
-        this.clienti = new CopyOnWriteArrayList<>();
-
-        this.numarClienti = interfataSimulare.getAlegereNumarClienti();
-        this.numarCozi = interfataSimulare.getAlegereNumarCozi();
-        this.timpSimulare= interfataSimulare.getAlegereDurataMaximaSimulare();
-        this.timpMinSosire= interfataSimulare.getAlegereTimpMinSosire();
-        this.timpMaxSosire = interfataSimulare.getAlegereTimpMaxSosire();
-        this.timpMinServire = interfataSimulare.getAlegereTimpMinServire();
-        this.timpMaxServire = interfataSimulare.getAlegereTimpMaxServire();
-        this.politicaDistribuireClienti = interfataSimulare.getPoliticaDeSelectie();
+    public SimulationManagerMain(InterfataSimulare simulationInterface) {
+        this.clients = new CopyOnWriteArrayList<>();
+        this.numberClients = simulationInterface.getChoiceOfClientsNumber();
+        this.numberQueue = simulationInterface.getChoiceOfQueueNumber();
+        this.simulationTime= simulationInterface.getChoiceMaxDurationSimulation();
+        this.minArrivalTime= simulationInterface.getChoiceMinArrivalTime();
+        this.maxArrivalTime = simulationInterface.getChoiceMaxArrivalTime();
+        this.minServingTime = simulationInterface.getChoiceMinServingTime();
+        this.maxServingTime = simulationInterface.getChoiceMaxServingTime();
+        this.distributionPolicy = simulationInterface.getSelectionPolicy();
         generateRandomClient();
-        this.scheduler = new Scheduler(numarCozi,politicaDistribuireClienti);
+        this.scheduler = new Scheduler(numberQueue,distributionPolicy);
         fileTxt = new File("log.txt");
         try{
-            //w=new FileReader(fileTxt);
             w = new FileWriter(fileTxt);
         }
         catch(IOException e)
@@ -217,7 +210,7 @@ public class SimulationManagerMain implements Runnable{
         }
     }
     public static void main(String[] args) {
-        InterfataSimulare interfataSimulare = new InterfataSimulare();
-        interfataSimulare.setVisible(true);
+        InterfataSimulare simulationInterface = new InterfataSimulare();
+        simulationInterface.setVisible(true);
     }
 }

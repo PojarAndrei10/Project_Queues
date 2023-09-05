@@ -1,124 +1,121 @@
 package GUI;
 
 import BusinessLogic.Policy;
-import GUI.Controller;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class InterfataSimulare  extends  JFrame{
     private JPanel panel = new JPanel();
-    private JLabel nrClienti = new JLabel();
-    private JLabel nrCozi = new JLabel();
-    private JLabel timpMaxSimulare = new JLabel();
-    private JLabel timpMinSosire = new JLabel();
-    private JLabel timpMaxSosire = new JLabel();
-    private JLabel timpMinServire = new JLabel();
-    private JLabel timpMaxServire = new JLabel();
-    private JLabel titlu = new JLabel();
-    private JLabel politicaDistribuireClienti = new JLabel();
-    private JSpinner alegereNumarClienti = new JSpinner();
-    private JSpinner alegereNumarCozi = new JSpinner();
-    private JSpinner alegereDurataMaximaSimulare = new JSpinner();
-    private JSpinner alegereTimpMinSosire = new JSpinner();
-    private JSpinner alegereTimpMaxSosire = new JSpinner();
-    private JSpinner alegereTimpMinServire = new JSpinner();
-    private JSpinner alegereTimpMaxServire = new JSpinner();
-    private ButtonGroup politicaSelectie = new ButtonGroup();
-    public JButton startSimulare = new JButton();
-    private JButton butonExit=new JButton();
+    private JLabel nrClients = new JLabel();
+    private JLabel nrQueue = new JLabel();
+    private JLabel maxSimulationTime = new JLabel();
+    private JLabel minArrivalTime = new JLabel();
+    private JLabel maxArrivalTime = new JLabel();
+    private JLabel minServingTime = new JLabel();
+    private JLabel maxServingTime = new JLabel();
+    private JLabel title = new JLabel();
+    private JLabel distributionPolicy = new JLabel();
+    private JSpinner choiceOfClientsNumber = new JSpinner();
+    private JSpinner choiceOfQueueNumber = new JSpinner();
+    private JSpinner choiceMaxDurationSimulation = new JSpinner();
+    private JSpinner choiceMinArrivalTime = new JSpinner();
+    private JSpinner choiceMaxArrivalTime = new JSpinner();
+    private JSpinner choiceMinServingTime = new JSpinner();
+    private JSpinner choiceMaxServingTime = new JSpinner();
+    private ButtonGroup selectionPolicy = new ButtonGroup();
+    public JButton startSimulation = new JButton();
+    private JButton exitButton=new JButton();
     private JRadioButton shortestQ = new JRadioButton();
     private JRadioButton shortestT = new JRadioButton();
     Controller c = new Controller(this);
 
-    public void gestionareLabel()
+    public void labelManagement()
     {
-        titlu.setBounds(470, 10, 200, 200);
-        titlu.setText("GESTIONARE COZI");
-        titlu.setFont(new Font("Serif", Font.ITALIC, 16));
+        title.setBounds(470, 10, 200, 200);
+        title.setText("GESTIONARE COZI");
+        title.setFont(new Font("Serif", Font.ITALIC, 16));
 
-        nrClienti.setBounds(40, 150, 200, 30);
-        nrClienti.setText("Numar clienti");
-        nrClienti.setFont(new Font("Serif", Font.ITALIC, 16));
+        nrClients.setBounds(40, 150, 200, 30);
+        nrClients.setText("Numar clienti");
+        nrClients.setFont(new Font("Serif", Font.ITALIC, 16));
 
-        nrCozi.setBounds(40, 190, 200, 30);
-        nrCozi.setText("Numar cozi");
-        nrCozi.setFont(new Font("Serif", Font.ITALIC, 16));
+        nrQueue.setBounds(40, 190, 200, 30);
+        nrQueue.setText("Numar cozi");
+        nrQueue.setFont(new Font("Serif", Font.ITALIC, 16));
 
-        timpMaxSimulare.setBounds(10,230,200,30);
-        timpMaxSimulare.setText("Timp max simulare");
-        timpMaxSimulare.setFont(new Font("Serif", Font.ITALIC, 16));
+        maxSimulationTime.setBounds(10,230,200,30);
+        maxSimulationTime.setText("Timp max simulare");
+        maxSimulationTime.setFont(new Font("Serif", Font.ITALIC, 16));
 
-        timpMinSosire.setBounds(450,150,200,30);
-        timpMinSosire.setText("Timp minim sosire");
-        timpMinSosire.setFont(new Font("Serif", Font.ITALIC, 16));
+        minArrivalTime.setBounds(450,150,200,30);
+        minArrivalTime.setText("Timp minim sosire");
+        minArrivalTime.setFont(new Font("Serif", Font.ITALIC, 16));
 
-        timpMaxSosire.setBounds(450,190,200,30);
-        timpMaxSosire.setText("Timp maxim sosire");
-        timpMaxSosire.setFont(new Font("Serif",Font.ITALIC,16));
+        maxArrivalTime.setBounds(450,190,200,30);
+        maxArrivalTime.setText("Timp maxim sosire");
+        maxArrivalTime.setFont(new Font("Serif",Font.ITALIC,16));
 
-        timpMinServire.setBounds(450,230,200,30);
-        timpMinServire.setText("Timp minim servire");
-        timpMinServire.setFont(new Font("Serif",Font.ITALIC,16));
+        minServingTime.setBounds(450,230,200,30);
+        minServingTime.setText("Timp minim servire");
+        minServingTime.setFont(new Font("Serif",Font.ITALIC,16));
 
-        timpMaxServire.setBounds(450,270,200,30);
-        timpMaxServire.setText("Timp maxim servire");
-        timpMaxServire.setFont(new Font("Serif",Font.ITALIC,16));
+        maxServingTime.setBounds(450,270,200,30);
+        maxServingTime.setText("Timp maxim servire");
+        maxServingTime.setFont(new Font("Serif",Font.ITALIC,16));
 
-        panel.add(titlu);
-        panel.add(nrClienti);
-        panel.add(nrCozi);
-        panel.add(timpMaxSimulare);
-        panel.add(timpMinSosire);
-        panel.add(timpMaxSosire);
-        panel.add(timpMinServire);
-        panel.add(timpMaxServire);
+        panel.add(title);
+        panel.add(nrClients);
+        panel.add(nrQueue);
+        panel.add(maxSimulationTime);
+        panel.add(minArrivalTime);
+        panel.add(maxArrivalTime);
+        panel.add(minServingTime);
+        panel.add(maxServingTime);
     }
-    public void gestionareJSpinner()
+    public void jSpinnerManagement()
     {
-        alegereNumarClienti.setBounds(140, 150, 250, 30);
-        panel.add(alegereNumarClienti);
+        choiceOfClientsNumber.setBounds(140, 150, 250, 30);
+        panel.add(choiceOfClientsNumber);
 
-        alegereNumarCozi.setBounds(140, 190, 250, 30);
-        panel.add(alegereNumarCozi);
+        choiceOfQueueNumber.setBounds(140, 190, 250, 30);
+        panel.add(choiceOfQueueNumber);
 
-        alegereDurataMaximaSimulare.setBounds(140,230,250,30);
-        panel.add(alegereDurataMaximaSimulare);
+        choiceMaxDurationSimulation.setBounds(140,230,250,30);
+        panel.add(choiceMaxDurationSimulation);
 
-        alegereTimpMinSosire.setBounds(580,150,250,30);
-        panel.add(alegereTimpMinSosire);
+        choiceMinArrivalTime.setBounds(580,150,250,30);
+        panel.add(choiceMinArrivalTime);
 
+        choiceMaxArrivalTime.setBounds(580,190,250,30);
+        panel.add(choiceMaxArrivalTime);
 
-        alegereTimpMaxSosire.setBounds(580,190,250,30);
-        panel.add(alegereTimpMaxSosire);
+        choiceMinServingTime.setBounds(580,230,250,30);
+        panel.add(choiceMinServingTime);
 
-        alegereTimpMinServire.setBounds(580,230,250,30);
-        panel.add(alegereTimpMinServire);
-
-        alegereTimpMaxServire.setBounds(580,270,250,30);
-        panel.add(alegereTimpMaxServire);
+        choiceMaxServingTime.setBounds(580,270,250,30);
+        panel.add(choiceMaxServingTime);
     }
-    public void gestionareButoane()
+    public void buttonManagement()
     {
-        startSimulare.setBounds(50, 400, 200, 50);
-        startSimulare.setText("START");
-        startSimulare.setBackground(new Color(72, 99, 182));
-        startSimulare.addActionListener(c);
-        panel.add(startSimulare);
+        startSimulation.setBounds(50, 400, 200, 50);
+        startSimulation.setText("START");
+        startSimulation.setBackground(new Color(72, 99, 182));
+        startSimulation.addActionListener(c);
+        panel.add(startSimulation);
 
-        butonExit.setBounds(50,500,200,50);
-        butonExit.setText("EXIT");
-        butonExit.setBackground(new Color(72, 99, 182));
-        butonExit.addActionListener(e ->  {
+        exitButton.setBounds(50,500,200,50);
+        exitButton.setText("EXIT");
+        exitButton.setBackground(new Color(72, 99, 182));
+        exitButton.addActionListener(e ->  {
             System.exit(0);
         });
-        panel.add(butonExit);
+        panel.add(exitButton);
     }
-    public void gestionareRestul()
+    public void restManagement()
     {
-        politicaDistribuireClienti.setBounds(600,400,400,50);
-        politicaDistribuireClienti.setText("Politica de selectie(Selection BusinessLogic.Policy):");
-        politicaDistribuireClienti.setFont(new Font("Serif", Font.ITALIC, 16));
+        distributionPolicy.setBounds(600,400,400,50);
+        distributionPolicy.setText("Politica de selectie(Selection BusinessLogic.Policy):");
+        distributionPolicy.setFont(new Font("Serif", Font.ITALIC, 16));
 
         shortestQ = new JRadioButton("Cea mai scurtă coadă de așteptare", true);
         shortestQ.setBounds(500,500,300,50);
@@ -130,15 +127,15 @@ public class InterfataSimulare  extends  JFrame{
         shortestT.setBackground(new Color(255, 255, 182));
         shortestT.setFont(new Font("Serif", Font.ITALIC, 16));
 
-        politicaSelectie = new ButtonGroup();
-        politicaSelectie.add(shortestQ);
-        politicaSelectie.add(shortestT);
+        selectionPolicy = new ButtonGroup();
+        selectionPolicy.add(shortestQ);
+        selectionPolicy.add(shortestT);
 
-        panel.add(politicaDistribuireClienti);
+        panel.add(distributionPolicy);
         panel.add(shortestQ);
         panel.add(shortestT);
     }
-    public void interfata() {
+    public void applicationInterface() {
         this.setTitle("Gestionarea cozilor de asteptare folosind thread-uri si mecanisme de sincronizare");
         panel.setBackground(new Color(255, 255, 182));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,41 +143,41 @@ public class InterfataSimulare  extends  JFrame{
         this.getContentPane().add(panel, BorderLayout.CENTER);
         panel.setLayout(null);
 
-        gestionareLabel();
-        gestionareJSpinner();
-        gestionareButoane();
-        gestionareRestul();
+        labelManagement();
+        jSpinnerManagement();
+        buttonManagement();
+        restManagement();
         this.setContentPane(panel);
         this.setVisible(true);
     }
-    public Integer getAlegereNumarClienti() {
-        return ((Integer) alegereNumarClienti.getValue()).intValue();
+    public Integer getChoiceOfClientsNumber() {
+        return ((Integer) choiceOfClientsNumber.getValue()).intValue();
     }
-    public Integer getAlegereNumarCozi() {
-        return ((Integer) alegereNumarCozi.getValue()).intValue();
+    public Integer getChoiceOfQueueNumber() {
+        return ((Integer) choiceOfQueueNumber.getValue()).intValue();
     }
-    public Integer getAlegereDurataMaximaSimulare() {
-        return ((Integer) alegereDurataMaximaSimulare.getValue()).intValue();
+    public Integer getChoiceMaxDurationSimulation() {
+        return ((Integer) choiceMaxDurationSimulation.getValue()).intValue();
     }
-    public Integer getAlegereTimpMinSosire() {
-        return ((Integer) alegereTimpMinSosire.getValue()).intValue();
+    public Integer getChoiceMinArrivalTime() {
+        return ((Integer) choiceMinArrivalTime.getValue()).intValue();
     }
-    public Integer getAlegereTimpMaxSosire() {
-        return ((Integer) alegereTimpMaxSosire.getValue()).intValue();
+    public Integer getChoiceMaxArrivalTime() {
+        return ((Integer) choiceMaxArrivalTime.getValue()).intValue();
     }
-    public Integer getAlegereTimpMinServire() {
-        return ((Integer) alegereTimpMinServire.getValue()).intValue();
+    public Integer getChoiceMinServingTime() {
+        return ((Integer) choiceMinServingTime.getValue()).intValue();
     }
-    public Integer getAlegereTimpMaxServire() {
-        return ((Integer) alegereTimpMaxServire.getValue()).intValue();
+    public Integer getChoiceMaxServingTime() {
+        return ((Integer) choiceMaxServingTime.getValue()).intValue();
     }
-    public Policy getPoliticaDeSelectie(){
+    public Policy getSelectionPolicy(){
         if(shortestQ.isSelected())
             return Policy.SHORTEST_QUEUE;
         else
             return Policy.SHORTEST_TIME;
     }
     public InterfataSimulare() {
-        this.interfata();
+        this.applicationInterface();
     }
 }
