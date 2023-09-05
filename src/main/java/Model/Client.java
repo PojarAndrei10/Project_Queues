@@ -10,23 +10,18 @@ public class Client {
         this.serviceTime = serviceTime;
     }
     public Integer getArrivalTime() {
-
         return arrivalTime;
     }
     public Integer getServiceTime() {
-
         return serviceTime;
     }
     public void setID(Integer ID) {
-
         this.ID = ID;
     }
     public void setArrivalTime(Integer arrivalTime) {
-
         this.arrivalTime = arrivalTime;
     }
     public void setServiceTime(Integer serviceTime) {
-
         this.serviceTime = serviceTime;
     }
     @Override
@@ -37,5 +32,4 @@ public class Client {
                 ", durata serviciului =" + serviceTime +
                 '}';
     }
-
 }

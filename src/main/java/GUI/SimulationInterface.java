@@ -3,8 +3,7 @@ package GUI;
 import BusinessLogic.Policy;
 import javax.swing.*;
 import java.awt.*;
-
-public class InterfataSimulare  extends  JFrame{
+public class SimulationInterface extends  JFrame{
     private JPanel panel = new JPanel();
     private JLabel nrClients = new JLabel();
     private JLabel nrQueue = new JLabel();
@@ -28,7 +27,6 @@ public class InterfataSimulare  extends  JFrame{
     private JRadioButton shortestQ = new JRadioButton();
     private JRadioButton shortestT = new JRadioButton();
     Controller c = new Controller(this);
-
     public void labelManagement()
     {
         title.setBounds(470, 10, 200, 200);
@@ -177,7 +175,7 @@ public class InterfataSimulare  extends  JFrame{
         else
             return Policy.SHORTEST_TIME;
     }
-    public InterfataSimulare() {
+    public SimulationInterface() {
         this.applicationInterface();
     }
 }

@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller implements ChangeListener, ActionListener {
-    private InterfataSimulare simulationInterface;
+    private SimulationInterface simulationInterface;
     public boolean isValid(){
         boolean ok=true;
         Integer numberClients;
@@ -44,7 +44,7 @@ public class Controller implements ChangeListener, ActionListener {
         Thread thread = new Thread(sim);
         thread.start();
     }
-    public Controller(InterfataSimulare simulationInterface){
+    public Controller(SimulationInterface simulationInterface){
         this.simulationInterface=simulationInterface;
     }
     @Override

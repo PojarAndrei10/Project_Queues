@@ -2,7 +2,6 @@ package BusinessLogic;
 
 import Model.Client;
 import Model.MarketQueue;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -45,7 +44,7 @@ public class Scheduler {
             mq=it.next();
             if(!mq.getQueue().isEmpty()) return false;
         }
-return true;
+        return true;
     }
     public CopyOnWriteArrayList<MarketQueue> getMarketQueue() {
         return marketQueue;

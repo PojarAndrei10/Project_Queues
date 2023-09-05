@@ -4,7 +4,6 @@ import Model.Client;
 import Model.MarketQueue;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 public class ShortestQueueStrategy implements Strategy {
     @Override
     public void addClient(CopyOnWriteArrayList<MarketQueue> qm, Client c) {

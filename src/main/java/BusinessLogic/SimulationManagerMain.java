@@ -1,6 +1,6 @@
 package BusinessLogic;
 
-import GUI.InterfataSimulare;
+import GUI.SimulationInterface;
 import GUI.MarketWindow;
 import Model.Client;
 import Model.MarketQueue;
@@ -188,7 +188,7 @@ public class SimulationManagerMain implements Runnable{
             e.printStackTrace();
         }
     }
-    public SimulationManagerMain(InterfataSimulare simulationInterface) {
+    public SimulationManagerMain(SimulationInterface simulationInterface) {
         this.clients = new CopyOnWriteArrayList<>();
         this.numberClients = simulationInterface.getChoiceOfClientsNumber();
         this.numberQueue = simulationInterface.getChoiceOfQueueNumber();
@@ -210,7 +210,7 @@ public class SimulationManagerMain implements Runnable{
         }
     }
     public static void main(String[] args) {
-        InterfataSimulare simulationInterface = new InterfataSimulare();
+        SimulationInterface simulationInterface = new SimulationInterface();
         simulationInterface.setVisible(true);
     }
 }

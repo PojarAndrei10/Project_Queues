@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Client;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,19 +20,15 @@ public class MarketQueue implements Runnable{
     public void setQueue(BlockingQueue<Client> coada) {
         this.queue = coada;
     }
-
     public AtomicInteger getTimeWaiting() {
         return timeWaiting;
     }
-
     public void setTimeWaiting(AtomicInteger timeWaiting) {
         this.timeWaiting = timeWaiting;
     }
-
     public AtomicInteger getNumberClientsWaiting() {
         return numberClientsWaiting;
     }
-
     public void setNumberClientsWaiting(AtomicInteger numberClientsWaiting) {
         this.numberClientsWaiting = numberClientsWaiting;
     }
@@ -78,7 +72,6 @@ public class MarketQueue implements Runnable{
             sb.append(" ").append(i);
         return sb.toString();
     }
-
     public void setOk(boolean b) {
         this.ok=ok;
     }

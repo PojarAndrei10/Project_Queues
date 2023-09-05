@@ -2,7 +2,6 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class MarketWindow extends JFrame{
     private SpringLayout sl = new SpringLayout();
     public static JPanel interfacePanel;
@@ -16,7 +15,6 @@ public class MarketWindow extends JFrame{
         this.interfacePanel.setBackground(new Color(153, 165, 201));
         this.getContentPane().add(this.interfacePanel);
     }
-
     public SpringLayout getSl() {
         return sl;
     }

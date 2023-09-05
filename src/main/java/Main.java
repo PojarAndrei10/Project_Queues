@@ -1,8 +1,7 @@
-import GUI.InterfataSimulare;
-
+import GUI.SimulationInterface;
 public class Main {
     public static void main(String[] args) {
-       InterfataSimulare applicationPanel=new InterfataSimulare();
+       SimulationInterface simulationInterface=new SimulationInterface();
 
     }
 }
